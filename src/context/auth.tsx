@@ -18,21 +18,25 @@ interface AuthProviderProps {
 }
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   const usubscribe = onAuthStateChanged(auth, (user) => {
-  //     setUser(user);
-  //     setIsLoading(false);
-  //   });
+  useEffect(() => {
+    const usubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setIsLoading(false);
+    });
 
-  //   return usubscribe;
-  // }, []);
+    return usubscribe;
+  }, []);
 
   const value = {
     user,
     isLoading,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!isLoading && children}
+    </AuthContext.Provider>
+  );
 };
