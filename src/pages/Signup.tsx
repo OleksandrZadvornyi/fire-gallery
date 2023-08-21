@@ -74,7 +74,7 @@ const Signup = () => {
               <p className="text-center">
                 Already have an account?{" "}
                 <a href="/signin" className="text-blue-400">
-                  Log In
+                  Sign In
                 </a>
               </p>
               <div className="flex items-center mt-4 mb-2">
@@ -83,7 +83,7 @@ const Signup = () => {
                 <hr className="w-[43%] h-px bg-gray-200 border-0 dark:bg-gray-600" />
               </div>
               <div className="form-control">
-                <button className="btn btn-outline">Sign up with Google</button>
+                <button className="btn btn-outline">Continue with Google</button>
               </div>
             </div>
           </div>
