@@ -1,9 +1,9 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -13,7 +13,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -37,7 +37,7 @@ const Signup = () => {
           <div className="card sm:w-[30rem] shadow-2xl bg-base-100 px-4">
             <div className="card-body">
               <div className="text-center">
-                <h2 className="text-3xl font-bold ">Sign Up</h2>
+                <h2 className="text-3xl font-bold ">Sign In</h2>
                 <p className="py-2">Let's share your photos to the world!</p>
               </div>
               <div className="form-control">
@@ -69,12 +69,12 @@ const Signup = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Sign up</button>
+                <button className="btn btn-primary">Sign In</button>
               </div>
               <p className="text-center">
-                Already have an account?{" "}
-                <a href="/signin" className="text-blue-400">
-                  Log In
+                Don't have an account?{" "}
+                <a href="/signup" className="text-blue-400">
+                  Sign Up
                 </a>
               </p>
               <div className="flex items-center mt-4 mb-2">
@@ -93,4 +93,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignIn;
