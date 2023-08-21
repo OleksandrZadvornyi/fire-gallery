@@ -9,7 +9,6 @@ const useStorage = () => {
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useAuth();
-  console.log(user);
 
   const startUpload = (file: File) => {
     if (!file) {
