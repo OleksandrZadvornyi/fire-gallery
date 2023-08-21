@@ -1,5 +1,5 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { db, storage } from "../firebase/config";
 import { v4 as uuidv4 } from "uuid";
@@ -49,7 +49,7 @@ const useStorage = () => {
         // store data into firestore
         await addDoc(collection(db, "images"), {
           imageUrl: downloadURL,
-          createdAt: new Date(),
+          createdAt: serverTimestamp(),
           userEmail: user?.email,
         });
       }
