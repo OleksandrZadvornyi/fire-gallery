@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 justify-between">
-      <a className="font-bold normal-case text-xl underline">FireGallery 📷</a>
+      <a className="font-bold normal-case text-xl underline cursor-pointer" href="/">FireGallery 📷</a>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

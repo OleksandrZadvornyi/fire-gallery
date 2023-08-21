@@ -50,7 +50,7 @@ const Signup = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
