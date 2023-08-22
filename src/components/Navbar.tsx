@@ -2,7 +2,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 
 const Navbar = () => {
-  const handleLogout = async () => {
+  const handleSignout = async () => {
     try {
       await signOut(auth);
     } catch (error) {
@@ -12,8 +12,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 justify-between">
-      <a className="font-bold normal-case text-xl underline cursor-pointer" href="/">FireGallery 📷</a>
-      <button onClick={handleLogout}>Logout</button>
+      <a className="font-bold normal-case text-xl cursor-pointer" href="/">FireGallery 🔥</a>
+      <button onClick={handleSignout}>Sign out</button>
     </div>
   );
 };
