@@ -1,7 +1,10 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase/config";
+import { auth, provider } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,6 +23,14 @@ const Signup = () => {
     }
   };
 
+  const handleSignUnWithGoogle = () => {
+    try {
+      signInWithPopup(auth, provider);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
       {error && error}
@@ -83,7 +94,13 @@ const Signup = () => {
                 <hr className="w-[43%] h-px bg-gray-200 border-0 dark:bg-gray-600" />
               </div>
               <div className="form-control">
-                <button className="btn btn-outline">Continue with Google</button>
+                <button
+                  className="btn btn-outline"
+                  onClick={handleSignUnWithGoogle}
+                >
+                  <FontAwesomeIcon icon={faGoogle} />
+                  Continue with Google
+                </button>
               </div>
             </div>
           </div>
