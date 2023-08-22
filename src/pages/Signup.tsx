@@ -63,6 +63,7 @@ const Signup = () => {
                   }}
                   placeholder="email"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -77,6 +78,9 @@ const Signup = () => {
                   }}
                   placeholder="password"
                   className="input input-bordered"
+                  required
+                  pattern="(?=.*\d)(?=.*[\W_]).{7,}"
+                  title="Minimum of 7 characters. Should have at least one special character and one number."
                 />
               </div>
               <div className="form-control mt-6">

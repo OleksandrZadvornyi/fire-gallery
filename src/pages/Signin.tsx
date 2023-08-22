@@ -23,9 +23,9 @@ const SignIn = () => {
     }
   };
 
-  const handleSignInWithGoogle = async () => {
+  const handleSignInWithGoogle = () => {
     try {
-      await signInWithPopup(auth, provider);
+      signInWithPopup(auth, provider);
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -64,6 +64,7 @@ const SignIn = () => {
                   }}
                   placeholder="email"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -78,6 +79,7 @@ const SignIn = () => {
                   }}
                   placeholder="password"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control mt-6">
