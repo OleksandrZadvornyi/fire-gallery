@@ -39,8 +39,8 @@ const Signup = () => {
           <div className="text-center">
             <h1
               className="text-5xl font-bold bg-gradient-to-r bg-clip-text  text-transparent 
-            from-yellow-500 via-red-500 to-orange-500
-            animate-text mb-4"
+                       from-yellow-500 via-red-500 to-orange-500
+                         animate-text mb-4"
             >
               FireGallery
             </h1>
