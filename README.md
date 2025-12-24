@@ -1,31 +1,95 @@
-# React + TypeScript + Vite
+# FireGallery 🔥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FireGallery is a responsive, real-time image gallery application. It allows users to securely sign in, upload images and view a shared gallery of photos. The project is built with performance and modern web standards in mind, utilizing React (Vite) for the frontend and the Firebase ecosystem for backend services.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **User Authentication:** Secure Sign Up and Sign In using email/password or Google Auth (via Firebase Authentication).
+* **Image Upload:** Drag-and-drop or file selection support with a real-time progress bar.
+* **Cloud Storage:** Images are securely stored in Firebase Storage.
+* **Real-time Database:** Image metadata (URL, uploader email, timestamp) is synced instantly using Firestore.
+* **Responsive UI:** Styled with **Tailwind CSS** and **DaisyUI** for a clean, mobile-friendly interface.
+* **Protected Routes:** Ensures only authenticated users can access private pages.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+* **Frontend:** React, TypeScript, Vite
+* **Styling:** Tailwind CSS, DaisyUI
+* **Backend:** Firebase (Auth, Firestore, Storage)
+* **Icons:** FontAwesome
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Getting Started
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Prerequisites
+
+* Node.js (v14 or higher)
+* npm or yarn
+* A Firebase project created at [console.firebase.google.com](https://console.firebase.google.com/)
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/OleksandrZadvornyi/fire-gallery.git
+    cd fire-gallery
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Firebase**
+    * Create a file named `config.ts` inside `src/firebase/` (or use `.env` variables if your project supports it).
+    * Paste your Firebase configuration keys:
+    ```typescript
+    // src/firebase/config.ts
+    import { initializeApp } from "firebase/app";
+    import { getAuth } from "firebase/auth";
+    import { getFirestore } from "firebase/firestore";
+    import { getStorage } from "firebase/storage";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    export const auth = getAuth(app);
+    export const db = getFirestore(app);
+    export const storage = getStorage(app);
+    ```
+
+4.  **Enable Firebase Services**
+    * **Authentication:** Enable "Email/Password" and "Google" providers.
+    * **Firestore:** Create a database and set rules to allow read/write.
+    * **Storage:** Enable storage and set rules to allow read/write.
+
+### Run Locally
+
+Start the development server:
+
+```bash
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 📂 Project Structure
 
-## Deployment
+```
+src/
+├── components/      # Reusable UI components (Navbar, UploadForm, ImageGallery)
+├── context/         # React Context for global state (AuthContext)
+├── firebase/        # Firebase configuration and initialization
+├── hooks/           # Custom hooks (useAuth, useFirestore, useStorage)
+├── pages/           # Page components (Home, Signup, Signin)
+├── routes/          # Route definitions (PrivateRoute, PublicRoute)
+└── main.tsx         # Entry point
+```
 
-This app is deployed using **Firebase Hosting**. You can view the live version of the app by visiting [https://fire-gallery-84947.web.app/](https://fire-gallery-84947.web.app/).
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
