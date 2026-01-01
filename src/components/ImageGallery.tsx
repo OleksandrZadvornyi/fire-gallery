@@ -1,22 +1,22 @@
 import { useState } from "react";
 import useFirestore from "../hooks/useFirestore";
-import { useAuth } from "../hooks/useAuth"; 
+import { useAuth } from "../hooks/useAuth";
 import useDeleteImage from "../hooks/useDeleteImage";
 
 const ImageGallery = () => {
   const { docs: images, isLoading } = useFirestore("images");
-  const { user } = useAuth(); 
-  const { deleteImage } = useDeleteImage(); 
+  const { user } = useAuth();
+  const { deleteImage } = useDeleteImage();
 
   const [imgClicked, setImgClicked] = useState(false);
   const [clickedImgUrl, setClickedImgUrl] = useState("");
 
   const handleDelete = async (e: React.MouseEvent, id: string, imageUrl: string) => {
     e.stopPropagation();
-    
+
     const confirmDelete = window.confirm("Are you sure you want to delete this image?");
     if (confirmDelete) {
-        await deleteImage(id, imageUrl);
+      await deleteImage(id, imageUrl);
     }
   };
 
@@ -47,7 +47,7 @@ const ImageGallery = () => {
                   }}
                   className="w-full rounded-t-xl"
                 />
-                
+
                 {/* 5. Conditional Render: Show delete button ONLY if user owns image */}
                 {user?.email === image.userEmail && (
                   <button
@@ -69,15 +69,15 @@ const ImageGallery = () => {
         </div>
       )}
       {imgClicked && (
-        <div 
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            onClick={() => setImgClicked(false)}
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={() => setImgClicked(false)}
         >
-             <img
-              src={clickedImgUrl}
-              alt="Clicked Image"
-              className="max-w-[90vw] max-h-[90vh] object-contain cursor-pointer"
-            />
+          <img
+            src={clickedImgUrl}
+            alt="Clicked Image"
+            className="max-w-[90vw] max-h-[90vh] object-contain cursor-pointer"
+          />
         </div>
       )}
     </>

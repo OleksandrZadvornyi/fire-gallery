@@ -1,21 +1,24 @@
 # FireGallery 🔥
 
-FireGallery is a responsive, real-time image gallery application. It allows users to securely sign in, upload images and view a shared gallery of photos. The project is built with performance and modern web standards in mind, utilizing React (Vite) for the frontend and the Firebase ecosystem for backend services.
+FireGallery is a responsive, real-time image gallery application. It allows users to securely sign in, upload images via drag-and-drop, and view a shared gallery of photos in a beautiful masonry layout. The project is built with performance and modern web standards in mind, utilizing React (Vite) for the frontend and the Firebase ecosystem for backend services.
 
 ## ✨ Features
 
+* **Public Gallery Access:** The gallery is publicly visible to guests, while sensitive actions (Upload/Delete) remain protected.
 * **User Authentication:** Secure Sign Up and Sign In using email/password or Google Auth (via Firebase Authentication).
-* **Image Upload:** Drag-and-drop or file selection support with a real-time progress bar.
-* **Cloud Storage:** Images are securely stored in Firebase Storage.
+* **Modern Drag & Drop Upload:** Intuitive file upload zone powered by `react-dropzone` with real-time progress bars.
+* **Masonry Layout:** Images are displayed in a Pinterest-style masonry grid, handling different aspect ratios gracefully.
+* **Image Deletion:** Users can manage their content by deleting images they have uploaded.
+* **Smart Feedback:** Interactive toast notifications (via `react-hot-toast`) for uploads, errors, and authentication events.
 * **Real-time Database:** Image metadata (URL, uploader email, timestamp) is synced instantly using Firestore.
 * **Responsive UI:** Styled with **Tailwind CSS** and **DaisyUI** for a clean, mobile-friendly interface.
-* **Protected Routes:** Ensures only authenticated users can access private pages.
 
 ## 🛠️ Tech Stack
 
 * **Frontend:** React, TypeScript, Vite
 * **Styling:** Tailwind CSS, DaisyUI
 * **Backend:** Firebase (Auth, Firestore, Storage)
+* **Utilities:** `react-dropzone` (Uploads), `react-hot-toast` (Notifications)
 * **Icons:** FontAwesome
 
 ## 🚀 Getting Started
@@ -66,8 +69,8 @@ FireGallery is a responsive, real-time image gallery application. It allows user
 
 4.  **Enable Firebase Services**
     * **Authentication:** Enable "Email/Password" and "Google" providers.
-    * **Firestore:** Create a database and set rules to allow read/write.
-    * **Storage:** Enable storage and set rules to allow read/write.
+    * **Firestore:** Create a database and set rules to allow public read, private write.
+    * **Storage:** Enable storage and set rules to allow public read, private write.
 
 ### Run Locally
 
@@ -84,9 +87,9 @@ src/
 ├── components/      # Reusable UI components (Navbar, UploadForm, ImageGallery)
 ├── context/         # React Context for global state (AuthContext)
 ├── firebase/        # Firebase configuration and initialization
-├── hooks/           # Custom hooks (useAuth, useFirestore, useStorage)
+├── hooks/           # Custom hooks (useAuth, useFirestore, useStorage, useDeleteImage)
 ├── pages/           # Page components (Home, Signup, Signin)
-├── routes/          # Route definitions (PrivateRoute, PublicRoute)
+├── routes/          # Route definitions (PublicRoute)
 └── main.tsx         # Entry point
 ```
 

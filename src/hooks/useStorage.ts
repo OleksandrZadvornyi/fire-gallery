@@ -29,7 +29,7 @@ const useStorage = () => {
       },
       (error) => {
         setError(error);
-        toast.error("Upload failed! ❌"); 
+        toast.error("Upload failed! ❌");
       },
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
@@ -42,9 +42,9 @@ const useStorage = () => {
         });
 
         toast.success("Image uploaded successfully! 🎉");
-        
+
         // Reset progress after a delay so the bar disappears cleanly
-        setTimeout(() => setProgress(0), 1000); 
+        setTimeout(() => setProgress(0), 1000);
       }
     );
   };
