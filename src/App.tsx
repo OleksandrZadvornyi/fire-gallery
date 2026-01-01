@@ -4,19 +4,12 @@ import Signup from "./pages/Signup";
 import SignIn from "./pages/Signin";
 import { AuthProvider } from "./context/auth";
 import PublicRoute from "./routes/PublicRoute";
-import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route
-          path=""
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
+        <Route path="/" element={<Home />}
         />
         <Route
           path="/signin"
