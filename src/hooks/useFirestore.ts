@@ -3,6 +3,7 @@ import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 type Image = {
+  id: string;
   createdAt: Date;
   userEmail: string;
   imageUrl: string;
@@ -26,7 +27,7 @@ const useFirestore = (collectionName: string) => {
             const imageUrl = doc.data().imageUrl;
             const createdAt = doc.data().createdAt.toDate();
             const userEmail = doc.data().userEmail;
-            images.push({ imageUrl, createdAt, userEmail });
+            images.push({ id: doc.id, imageUrl, createdAt, userEmail });
           });
           setDocs(images);
           setIsLoading(false);
