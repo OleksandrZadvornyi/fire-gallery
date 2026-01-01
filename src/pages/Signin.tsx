@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { auth, provider } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -10,31 +11,33 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Welcome back!");
       navigate("/");
     } catch (error) {
-      setError(error.message);
+      console.log(error);
+      toast.error("Invalid email or password.");
     }
   };
 
   const handleSignInWithGoogle = () => {
     try {
       signInWithPopup(auth, provider);
+      toast.success("Welcome back!");
       navigate("/");
     } catch (error) {
-      setError(error.message);
+      console.log(error);
+      toast.error("Google sign in failed.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && error}
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center">

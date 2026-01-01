@@ -1,19 +1,18 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { db, storage } from "../firebase/config";
+import toast from "react-hot-toast";
 
 const useDeleteImage = () => {
   const deleteImage = async (id: string, imageUrl: string) => {
     try {
-      // 1. Delete the record from Firestore
       await deleteDoc(doc(db, "images", id));
-
-      // 2. Delete the file from Storage
       const imageRef = ref(storage, imageUrl);
       await deleteObject(imageRef);
-      
+      toast.success("Image deleted successfully.");
     } catch (error) {
       console.error("Error deleting image:", error);
+      toast.error("Failed to delete image.");
     }
   };
 
