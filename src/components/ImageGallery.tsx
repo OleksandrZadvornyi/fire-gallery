@@ -31,13 +31,13 @@ const ImageGallery = () => {
   return (
     <>
       {!imgClicked && (
-        <div className="grid md:grid-cols-3 justify-center gap-4 mt-10">
+        <div className="columns-1 md:columns-3 gap-4 mt-10 mx-4">
           {images.map((image) => (
             <div
               key={image.id}
-              className="card card-compact w-full bg-base-100 shadow-xl"
+              className="card card-compact w-full bg-base-100 shadow-xl group break-inside-avoid mb-4"
             >
-              <figure className="max-h-[15rem] cursor-pointer">
+              <figure className="cursor-pointer relative">
                 <img
                   src={image.imageUrl}
                   alt="Image"
@@ -45,34 +45,40 @@ const ImageGallery = () => {
                     setImgClicked(true);
                     setClickedImgUrl(image.imageUrl);
                   }}
-                  className="w-full h-full object-cover"
+                  className="w-full rounded-t-xl"
                 />
                 
                 {/* 5. Conditional Render: Show delete button ONLY if user owns image */}
                 {user?.email === image.userEmail && (
                   <button
-                    className="btn btn-error btn-xs absolute bottom-2 right-2 opacity-90"
+                    className="btn btn-error btn-xs absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     onClick={(e) => handleDelete(e, image.id, image.imageUrl)}
                   >
                     Delete
                   </button>
                 )}
               </figure>
-              <div className="card-body justify-end">
-                <p className="flex-grow-0">Upload by: {image.userEmail}</p>
-                <span>Created on: {image.createdAt.toLocaleDateString()}</span>
+              <div className="card-body">
+                <p className="text-sm">Upload by: {image.userEmail}</p>
+                <span className="text-xs text-gray-500">
+                  {image.createdAt.toLocaleDateString()}
+                </span>
               </div>
             </div>
           ))}
         </div>
       )}
       {imgClicked && (
-        <img
-          src={clickedImgUrl}
-          alt="Clicked Image"
-          className="fixed top-[50%] left-[50%] cursor-pointer translate-x-[-50%] translate-y-[-50%] w-[50%] max-h-[100vw]"
-          onClick={() => setImgClicked(false)}
-        />
+        <div 
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+            onClick={() => setImgClicked(false)}
+        >
+             <img
+              src={clickedImgUrl}
+              alt="Clicked Image"
+              className="max-w-[90vw] max-h-[90vh] object-contain cursor-pointer"
+            />
+        </div>
       )}
     </>
   );
